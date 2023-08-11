@@ -19,29 +19,29 @@ class _BodyState extends State<Body> {
       child: ListView.builder(
         itemCount: demoCarts.length,
         itemBuilder: (context, index) => Padding(
-          padding: EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10),
           child: Dismissible(
-            key: Key(demoCarts[index].product.id.toString()),
-            direction: DismissDirection.endToStart,
-            onDismissed: (direction) {
-              setState(() {
-                demoCarts.removeAt(index);
-              });
-            },
-            background: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: Color(0xFFFFE6E6),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Row(
-                children: [
-                  Spacer(),
-                  SvgPicture.asset("assets/icons/Trash.svg"),
-                ],
-              ),
-            ),
-            child: CartCard(cart: demoCarts[index]),
+        key: Key(demoCarts[index].product.id.toString()),
+        direction: DismissDirection.endToStart,
+        onDismissed: (direction) {
+          setState(() {
+            demoCarts.removeAt(index);
+          });
+        },
+        background: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 0),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFFE6E6),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Row(
+            children: [
+              const Spacer(),
+              SvgPicture.asset("assets/icons/Trash.svg"),
+            ],
+          ),
+        ),
+        child: CartCard(cart: demoCarts[index]),
           ),
         ),
       ),

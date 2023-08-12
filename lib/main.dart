@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:e_commerce_flutter/routes.dart';
-import 'package:e_commerce_flutter/screens/profile/profile_screen.dart';
-import 'package:e_commerce_flutter/screens/splash/splash_screen.dart';
-import 'package:e_commerce_flutter/theme.dart';
+import 'package:Marketplace/routes.dart';
+import 'package:Marketplace/screens/profile/profile_screen.dart';
+import 'package:Marketplace/screens/splash/splash_screen.dart';
+import 'package:Marketplace/theme.dart';
 
 void main() {
   runApp(const MyApp());

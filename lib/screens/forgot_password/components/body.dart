@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:e_commerce_flutter/components/custom_surfix_icon.dart';
-import 'package:e_commerce_flutter/components/default_button.dart';
-import 'package:e_commerce_flutter/components/form_error.dart';
-import 'package:e_commerce_flutter/components/no_account_text.dart';
-import 'package:e_commerce_flutter/size_config.dart';
+import 'package:Marketplace/components/custom_surfix_icon.dart';
+import 'package:Marketplace/components/default_button.dart';
+import 'package:Marketplace/components/form_error.dart';
+import 'package:Marketplace/components/no_account_text.dart';
+import 'package:Marketplace/size_config.dart';
 
 import '../../../constants.dart';
 

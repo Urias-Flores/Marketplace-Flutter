@@ -1,14 +1,14 @@
 import 'package:flutter/widgets.dart';
-import 'package:e_commerce_flutter/screens/cart/cart_screen.dart';
-import 'package:e_commerce_flutter/screens/complete_profile/complete_profile_screen.dart';
-import 'package:e_commerce_flutter/screens/details/details_screen.dart';
-import 'package:e_commerce_flutter/screens/forgot_password/forgot_password_screen.dart';
-import 'package:e_commerce_flutter/screens/home/home_screen.dart';
-import 'package:e_commerce_flutter/screens/login_success/login_success_screen.dart';
-import 'package:e_commerce_flutter/screens/otp/otp_screen.dart';
-import 'package:e_commerce_flutter/screens/profile/profile_screen.dart';
-import 'package:e_commerce_flutter/screens/sign_in/sign_in_screen.dart';
-import 'package:e_commerce_flutter/screens/splash/splash_screen.dart';
+import 'package:Marketplace/screens/cart/cart_screen.dart';
+import 'package:Marketplace/screens/complete_profile/complete_profile_screen.dart';
+import 'package:Marketplace/screens/details/details_screen.dart';
+import 'package:Marketplace/screens/forgot_password/forgot_password_screen.dart';
+import 'package:Marketplace/screens/home/home_screen.dart';
+import 'package:Marketplace/screens/login_success/login_success_screen.dart';
+import 'package:Marketplace/screens/otp/otp_screen.dart';
+import 'package:Marketplace/screens/profile/profile_screen.dart';
+import 'package:Marketplace/screens/sign_in/sign_in_screen.dart';
+import 'package:Marketplace/screens/splash/splash_screen.dart';
 
 import 'screens/sign_up/sign_up_screen.dart';
 

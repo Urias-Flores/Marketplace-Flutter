@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:e_commerce_flutter/components/default_button.dart';
-import 'package:e_commerce_flutter/models/Product.dart';
-import 'package:e_commerce_flutter/size_config.dart';
+import 'package:Marketplace/components/default_button.dart';
+import 'package:Marketplace/models/Product.dart';
+import 'package:Marketplace/size_config.dart';
 
 import 'color_dots.dart';
 import 'product_description.dart';

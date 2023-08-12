@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:e_commerce_flutter/components/default_button.dart';
-import 'package:e_commerce_flutter/screens/home/home_screen.dart';
-import 'package:e_commerce_flutter/size_config.dart';
+import 'package:Marketplace/components/default_button.dart';
+import 'package:Marketplace/screens/home/home_screen.dart';
+import 'package:Marketplace/size_config.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});

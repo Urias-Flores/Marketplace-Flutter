@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:e_commerce_flutter/constants.dart';
-import 'package:e_commerce_flutter/screens/sign_in/sign_in_screen.dart';
-import 'package:e_commerce_flutter/size_config.dart';
+import 'package:Marketplace/constants.dart';
+import 'package:Marketplace/screens/sign_in/sign_in_screen.dart';
+import 'package:Marketplace/size_config.dart';
 
 // This is the best practice
 import '../components/splash_content.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:e_commerce_flutter/constants.dart';
-import 'package:e_commerce_flutter/size_config.dart';
+import 'package:Marketplace/constants.dart';
+import 'package:Marketplace/size_config.dart';
 
 import 'otp_form.dart';
 

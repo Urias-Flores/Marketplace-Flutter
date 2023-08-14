@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "602068764637",
+    "project_id": "marketplace-flutter-8c6bd",
+    "storage_bucket": "marketplace-flutter-8c6bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602068764637:android:bc462f3302f3d6bb801834",
+        "android_client_info": {
+          "package_name": "hn.edu.unah.marketplace_fluter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602068764637-mnrav4ughf9rtii09q41psv2qn3fm3dv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1HaUg7mjLjssQhi2cw3OK-yMDCFNtcG8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602068764637-mnrav4ughf9rtii09q41psv2qn3fm3dv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

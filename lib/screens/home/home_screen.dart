@@ -5,12 +5,14 @@ import 'package:Marketplace/enums.dart';
 import 'components/body.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
   static String routeName = "/home";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Body(),
-      bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.home),
+      bottomNavigationBar: const CustomBottomNavBar(selectedMenu: MenuState.home),
     );
   }
 }

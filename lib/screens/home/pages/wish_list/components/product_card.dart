@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:Marketplace/models/Cart.dart';
 
-import '../../../constants.dart';
-import '../../../size_config.dart';
+import '../../../../../constants.dart';
+import '../../../../../size_config.dart';
 
 class ProductCard extends StatelessWidget {
   ProductCard({
@@ -40,7 +40,7 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${title.substring(0, titleLength > 25 ? 23 : titleLength).trim()}${titleLength > 25 ? '...' : ''}',
+              '${title.substring(0, titleLength > 22 ? 22 : titleLength).trim()}${titleLength > 25 ? '...' : ''}',
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
               style: const TextStyle(color: Colors.black, fontSize: 16),

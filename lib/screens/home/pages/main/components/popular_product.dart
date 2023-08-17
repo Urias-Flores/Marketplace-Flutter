@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:Marketplace/components/product_card.dart';
 import 'package:Marketplace/models/Product.dart';
 
-import '../../../size_config.dart';
+import '../../../../../size_config.dart';
 import 'section_title.dart';
 
 class PopularProducts extends StatelessWidget {

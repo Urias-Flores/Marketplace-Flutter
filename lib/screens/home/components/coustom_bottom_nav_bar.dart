@@ -1,20 +1,20 @@
-import 'package:Marketplace/screens/my_products/my_products_screen.dart';
-import 'package:Marketplace/screens/wish_list/wish_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:Marketplace/screens/home/home_screen.dart';
-import 'package:Marketplace/screens/profile/profile_screen.dart';
 
-import '../constants.dart';
-import '../enums.dart';
+import 'package:Marketplace/constants.dart';
 
-class CustomBottomNavBar extends StatelessWidget {
-  const CustomBottomNavBar({
-    Key? key,
-    required this.selectedMenu,
-  }) : super(key: key);
+class CustomBottomNavBar extends StatefulWidget {
+  const CustomBottomNavBar({super.key, required this.pageController});
+  final PageController pageController;
 
-  final MenuState selectedMenu;
+  @override
+  State<StatefulWidget> createState() {
+    return _CustomBottonNavBar();
+  }
+}
+
+class _CustomBottonNavBar extends State<CustomBottomNavBar>{
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -43,31 +43,52 @@ class CustomBottomNavBar extends StatelessWidget {
               IconButton(
                 icon: SvgPicture.asset(
                   "assets/icons/Shop Icon.svg",
-                  color: MenuState.home == selectedMenu
+                  color: _currentPage == 0
                       ? kPrimaryColor
                       : inActiveIconColor,
                 ),
-                onPressed: () => Navigator.pushNamed(context, HomeScreen.routeName),
+                onPressed: () => setPage(page: 0),
               ),
               IconButton(
-                icon: SvgPicture.asset("assets/icons/Heart Icon.svg"),
-                onPressed: () => Navigator.pushNamed(context, WishListScreen.routeName),
+                icon: SvgPicture.asset(
+                  "assets/icons/Heart Icon.svg",
+                  color: _currentPage == 1
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                ),
+                onPressed: () => setPage(page: 1),
               ),
               IconButton(
-                icon: SvgPicture.asset("assets/icons/Chat bubble Icon.svg"),
-                onPressed: () => Navigator.pushNamed(context, MyProductsScreen.routeName),
+                icon: SvgPicture.asset(
+                  "assets/icons/archive icon.svg",
+                  color: _currentPage == 2
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                ),
+                onPressed: () => setPage(page: 2),
               ),
               IconButton(
                 icon: SvgPicture.asset(
                   "assets/icons/User Icon.svg",
-                  color: MenuState.profile == selectedMenu
+                  color: _currentPage == 3
                       ? kPrimaryColor
                       : inActiveIconColor,
                 ),
-                onPressed: () => Navigator.pushNamed(context, ProfileScreen.routeName),
+                onPressed: () => setPage(page: 3),
               ),
             ],
           )),
     );
+  }
+
+  void setPage({ required int page }){
+    setState(() {
+      _currentPage = page;
+      widget.pageController.animateToPage(
+          page,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeIn
+      );
+    });
   }
 }

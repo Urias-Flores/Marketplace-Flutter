@@ -1,15 +1,20 @@
+import 'package:Marketplace/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../../../constants.dart';
-import '../../../size_config.dart';
+import 'package:Marketplace/constants.dart';
+import 'package:Marketplace/size_config.dart';
 
 class SearchField extends StatelessWidget {
-  const SearchField({
+
+
+  SearchField({
     Key? key,
+    this.value = '',
   }) : super(key: key);
+  String? value;
 
   @override
   Widget build(BuildContext context) {
+    final textController = TextEditingController(text: value ?? '');
     return Container(
       width: SizeConfig.screenWidth * 0.6,
       decoration: BoxDecoration(
@@ -17,7 +22,14 @@ class SearchField extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextField(
-        onChanged: (value) => print(value),
+        controller: textController,
+        onSubmitted: (value) {
+          Navigator.pushNamed(
+              context,
+              SearchScreen.routeName,
+              arguments: value
+          );
+        },
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20),
@@ -26,7 +38,7 @@ class SearchField extends StatelessWidget {
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
             hintText: "Search product",
-            prefixIcon: Icon(Icons.search)),
+            prefixIcon: const Icon(Icons.search)),
       ),
     );
   }

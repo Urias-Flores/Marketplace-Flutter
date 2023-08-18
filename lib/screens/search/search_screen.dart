@@ -1,4 +1,4 @@
-import 'package:Marketplace/screens/search/header.dart';
+import 'package:Marketplace/screens/search/components/header.dart';
 import 'package:Marketplace/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:Marketplace/components/search_field.dart';

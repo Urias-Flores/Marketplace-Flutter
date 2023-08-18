@@ -30,21 +30,8 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Name here.',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const Text(
-                      'Product description will go here.',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
-                    ),
+                    nameText(text: 'Name here.'),
+                    descriptionText(text: 'Product description will go here'),
                     SizedBox(height: getProportionateScreenHeight(5)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,14 +41,12 @@ class ProductCard extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: getProportionateScreenHeight(5)),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          getButton(text: 'Editar', onPressed: () {}),
-                          getButton(text: 'Eliminar', onPressed: () {})
-                        ],
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        getButton(text: 'Editar', onPressed: () {}),
+                        getButton(text: 'Eliminar', onPressed: () {})
+                      ],
                     )
                   ],
                 )
@@ -86,10 +71,31 @@ class ProductCard extends StatelessWidget {
     );
   }
 
+  Text nameText({required String text}){
+    return Text(
+      text,
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+        fontSize: 16,
+      ),
+    );
+  }
+  
+  Text descriptionText({required String text}){
+    return Text(
+      text,
+      style: const TextStyle(
+        color: Colors.grey,
+        fontSize: 12,
+      ),
+    );
+  }
+
   Text priceText({required String text}) {
     return Text(
       text,
-      style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.bold),
+      style: const TextStyle(color: kPrimaryColor, fontWeight: FontWeight.bold),
     );
   }
 

@@ -10,9 +10,9 @@ class SearchHeader extends StatelessWidget{
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-          top: getProportionateScreenWidth(20),
-          right: getProportionateScreenWidth(5),
-          left: getProportionateScreenWidth(5),
+          top: getProportionateScreenHeight(20),
+          right: getProportionateScreenWidth(20),
+          left: getProportionateScreenWidth(20),
       ),
       child: Row(
         children: [
@@ -20,7 +20,9 @@ class SearchHeader extends StatelessWidget{
               onPressed: () { Navigator.pop(context); },
               icon: const Icon(Icons.arrow_back, color: Colors.black,)
           ),
-          SearchField( value: value, width: SizeConfig.screenWidth * 0.8, )
+          Expanded(
+              child: SearchField( value: value )
+          )
         ],
       ),
     );

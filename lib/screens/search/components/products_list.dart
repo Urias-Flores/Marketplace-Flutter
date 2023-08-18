@@ -15,7 +15,6 @@ class ProductList extends StatelessWidget{
             right: getProportionateScreenWidth(20),
             left: getProportionateScreenWidth(20)
           ),
-          //color: Colors.blue,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,10 +1,8 @@
-import 'package:Marketplace/screens/add_product/add_product_screen.dart';
 import 'package:Marketplace/screens/home/pages/my_products/my_products_page.dart';
 import 'package:Marketplace/screens/home/pages/profile/profile_screen.dart';
 import 'package:Marketplace/screens/home/pages/wish_list/wish_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:Marketplace/screens/home/components/coustom_bottom_nav_bar.dart';
-import 'package:Marketplace/enums.dart';
 
 import 'pages/main/main_page.dart';
 

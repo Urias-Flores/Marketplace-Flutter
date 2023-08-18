@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:Marketplace/screens/cart/cart_screen.dart';
 
-import '../../../size_config.dart';
+import '../../../../../size_config.dart';
 import 'icon_btn_with_counter.dart';
-import 'search_field.dart';
+import '../../../../../components/search_field.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({

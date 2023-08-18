@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:Marketplace/routes.dart';
-import 'package:Marketplace/screens/profile/profile_screen.dart';
 import 'package:Marketplace/screens/splash/splash_screen.dart';
 import 'package:Marketplace/theme.dart';
 
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: theme(),
       // home: SplashScreen(),
-      // We use routeName so that we dont need to remember the name
+      // We use routeName so that we don't need to remember the name
       initialRoute: SplashScreen.routeName,
       routes: routes,
     );

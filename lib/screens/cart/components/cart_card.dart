@@ -17,11 +17,7 @@ class CartCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: const BoxDecoration(
-          color: Colors.blue,
-        ),
-        child: Row(
+    return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
         SizedBox(
@@ -37,35 +33,34 @@ class CartCard extends StatelessWidget {
               child: Image.asset(cart.product.images[0]),
             ),
           ),
+       ),
+    const SizedBox(width: 20),
+    Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '${title.substring(0, titleLength > 25 ? 23 : titleLength).trim()}${titleLength > 25 ? '...' : ''}',
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+          style: const TextStyle(color: Colors.black, fontSize: 16),
         ),
-        const SizedBox(width: 20),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              //'${title.substring(0, titleLength > 25 ? 23 : titleLength).trim()}${titleLength > 25 ? '...' : ''}',
-              title,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-              style: const TextStyle(color: Colors.black, fontSize: 16),
-            ),
-            const SizedBox(height: 10),
-            Text.rich(
+        const SizedBox(height: 10),
+        Text.rich(
+          TextSpan(
+            text: "\$${cart.product.price}",
+            style: const TextStyle(
+                fontWeight: FontWeight.w600, color: kPrimaryColor),
+            children: [
               TextSpan(
-                text: "\$${cart.product.price}",
-                style: const TextStyle(
-                    fontWeight: FontWeight.w600, color: kPrimaryColor),
-                children: [
-                  TextSpan(
-                      text: " x${cart.numOfItem}",
-                      style: Theme.of(context).textTheme.bodyText1),
-                ],
-              ),
-            )
-          ],
+                  text: " x${cart.numOfItem}",
+                  style: Theme.of(context).textTheme.bodyText1),
+            ],
+          ),
         )
       ],
-    ));
+    )
+      ],
+    );
   }
 }

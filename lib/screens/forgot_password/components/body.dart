@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Marketplace/components/custom_surfix_icon.dart';
+import 'package:Marketplace/components/custom_suffix_icon.dart';
 import 'package:Marketplace/components/default_button.dart';
 import 'package:Marketplace/components/form_error.dart';
 import 'package:Marketplace/components/no_account_text.dart';
@@ -91,7 +91,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
               // If  you are using latest version of flutter then lable text and hint text shown like this
               // if you r using flutter less then 1.20.* then maybe this is not working properly
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
+              suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/Mail.svg"),
             ),
           ),
           SizedBox(height: getProportionateScreenHeight(30)),

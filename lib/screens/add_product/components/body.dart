@@ -10,8 +10,9 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+      padding:
+          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+      child: SingleChildScrollView(
         child: Column(
           children: [
             Text(
@@ -29,6 +30,8 @@ class Body extends StatelessWidget {
             const SizedBox(height: 40),
             const FormAddProduct()
           ],
-        ));
+        )
+      ),
+    );
   }
 }

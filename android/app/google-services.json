@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "602068764637",
-    "project_id": "marketplace-flutter-8c6bd",
-    "storage_bucket": "marketplace-flutter-8c6bd.appspot.com"
+    "project_number": "426274575496",
+    "project_id": "marketplace-b84f8",
+    "storage_bucket": "marketplace-b84f8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:602068764637:android:bc462f3302f3d6bb801834",
+        "mobilesdk_app_id": "1:426274575496:android:65c68e1f884cb449297b3d",
         "android_client_info": {
-          "package_name": "hn.edu.unah.marketplace_fluter"
+          "package_name": "hn.edu.unah.marketplace_flutter"
         }
       },
       "oauth_client": [
         {
-          "client_id": "602068764637-mnrav4ughf9rtii09q41psv2qn3fm3dv.apps.googleusercontent.com",
+          "client_id": "426274575496-g35okbebta7djtnv7qi6824eaogsrffo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC1HaUg7mjLjssQhi2cw3OK-yMDCFNtcG8"
+          "current_key": "AIzaSyD1_IU43MzhQd6kiFxi5QiSUnLBREOCiGc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "602068764637-mnrav4ughf9rtii09q41psv2qn3fm3dv.apps.googleusercontent.com",
+              "client_id": "426274575496-g35okbebta7djtnv7qi6824eaogsrffo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

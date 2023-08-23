@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "631856390356",
+    "project_id": "marketplace-se",
+    "storage_bucket": "marketplace-se.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631856390356:android:a180152cd020392908db41",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631856390356-cfh05rqms0mrdlft9c299jk46un80545.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaLjBEGjHQwohw-eoN2LGP71d8c0_pOnU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631856390356-cfh05rqms0mrdlft9c299jk46un80545.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

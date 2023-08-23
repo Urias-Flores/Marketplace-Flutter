@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:Marketplace/components/search_field.dart';
 
 import '../../components/product_card.dart';
-import '../../models/Product.dart';
+import '../../models/Product_Propio.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});

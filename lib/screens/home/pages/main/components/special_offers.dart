@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../size_config.dart';
+import 'package:Marketplace/Services/category_services.dart';
+import 'package:Marketplace/models/Category.dart';
+import 'package:Marketplace/size_config.dart';
 import 'section_title.dart';
 
 class SpecialOffers extends StatelessWidget {
@@ -10,6 +11,7 @@ class SpecialOffers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CategoryServices categoryServices = CategoryServices();
     return Column(
       children: [
         Padding(
@@ -23,32 +25,47 @@ class SpecialOffers extends StatelessWidget {
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              SpecialOfferCard(
-                image: "assets/images/Image Banner 2.png",
-                category: "Smartphone",
-                numOfProducts: 18,
-                press: () {},
-              ),
-              SpecialOfferCard(
-                image: "assets/images/Image Banner 3.png",
-                category: "Fashion",
-                numOfProducts: 24,
-                press: () {},
-              ),
-              SpecialOfferCard(
-                image: "assets/images/Image Banner 3.png",
-                category: "Others",
-                numOfProducts: 4,
-                press: () {},
-              ),
-              SizedBox(width: getProportionateScreenWidth(20)),
-            ],
-          ),
+          child: FutureBuilder(
+            future: categoryServices.getCategories(),
+            builder: (BuildContext context, AsyncSnapshot<List<Category>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.none) {
+                return const Center(
+                  child: Text('No hay conexion'),
+                );
+              }
+              if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
+              }
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              return Row(
+                children: [
+                  ...getListCategories(snapshot),
+                  SizedBox(width: getProportionateScreenWidth(20)),
+                ],
+              );
+            },
+          )
         ),
       ],
     );
+  }
+
+  List<SpecialOfferCard> getListCategories(AsyncSnapshot<List<Category>> categories){
+    List<SpecialOfferCard> categoriesWidget = [];
+    for(int i = 0; i < categories.data!.length; i++){
+      final category = categories.data![i];
+      print('CategoryID: ${category.id}');
+      final specialOfferCard = SpecialOfferCard(
+          category: category.name,
+          image: category.image,
+          numOfProducts: 20,
+          press: () {}
+      );
+      categoriesWidget.add(specialOfferCard);
+    }
+    return categoriesWidget;
   }
 }
 
@@ -78,7 +95,7 @@ class SpecialOfferCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Stack(
               children: [
-                Image.asset(
+                Image.network(
                   image,
                   fit: BoxFit.cover,
                 ),

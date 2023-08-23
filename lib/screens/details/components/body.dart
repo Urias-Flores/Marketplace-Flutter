@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:Marketplace/components/default_button.dart';
-import 'package:Marketplace/models/Product.dart';
+import 'package:Marketplace/models/Product_Propio.dart';
 import 'package:Marketplace/size_config.dart';
 
 import 'color_dots.dart';

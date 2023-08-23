@@ -1,16 +1,22 @@
+import 'package:Marketplace/screens/home/pages/no_sign_in/no_sign_in_page.dart';
+import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:Marketplace/screens/home/pages/profile/components/profiel_button.dart';
 import 'package:Marketplace/screens/sign_in/sign_in_screen.dart';
-import 'package:Marketplace/size_config.dart';
-import 'package:flutter/material.dart';
-
 import 'components/profile_menu.dart';
 import 'components/profile_pic.dart';
 
 class ProfilePage extends StatelessWidget {
-
   const ProfilePage({super.key});
+
+
   @override
   Widget build(BuildContext context) {
+    final currentUser = GetStorage().read('CurrentUser') ?? false;
+    return currentUser is String ? getInformationUser(context) : const NoSignInPage();
+  }
+
+  Widget getInformationUser(BuildContext context){
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
@@ -44,7 +50,10 @@ class ProfilePage extends StatelessWidget {
                 ProfileButton(
                   text: "Log Out",
                   icon: "assets/icons/Log out.svg",
-                  press: () { Navigator.pushNamed(context, SignInScreen.routeName); },
+                  press: () {
+                    GetStorage().remove('CurrentUser');
+                    Navigator.pushNamed(context, SignInScreen.routeName);
+                  },
                 ),
               ],
             ),

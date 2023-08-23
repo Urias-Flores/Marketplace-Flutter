@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:Marketplace/components/product_card.dart';
-import 'package:Marketplace/models/Product.dart';
+import 'package:Marketplace/models/Product_Propio.dart';
 import 'package:Marketplace/size_config.dart';
 
 class ProductList extends StatelessWidget{

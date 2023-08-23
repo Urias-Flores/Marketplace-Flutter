@@ -1,9 +1,22 @@
+import 'package:Marketplace/Services/user_services.dart';
+import 'package:Marketplace/firebase_options.dart';
+import 'package:Marketplace/models/Contact.dart';
+import 'package:Marketplace/models/User.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:Marketplace/routes.dart';
 import 'package:Marketplace/screens/splash/splash_screen.dart';
 import 'package:Marketplace/theme.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform
+  );
+  await GetStorage.init();
+
+  GetStorage().write('CurrentUser', 'some user');
   runApp(const MyApp());
 }
 

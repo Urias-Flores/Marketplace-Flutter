@@ -1,14 +1,20 @@
 import 'package:Marketplace/screens/home/pages/my_products/components/product_card.dart';
+import 'package:Marketplace/screens/home/pages/no_sign_in/no_sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:Marketplace/screens/add_product/add_product_screen.dart';
-
-import '../../../../size_config.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:Marketplace/size_config.dart';
 
 class MyProductsPage extends StatelessWidget{
   const MyProductsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = GetStorage().read('CurrentUser') ?? false;
+    return user is String ? getProductList(context) : const NoSignInPage();
+  }
+
+  Scaffold getProductList(BuildContext context){
     return Scaffold(
       appBar: buildAppBar(context, 20),
       body: ListView.builder(

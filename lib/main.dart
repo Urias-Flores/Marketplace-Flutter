@@ -1,7 +1,4 @@
-import 'package:Marketplace/Services/user_services.dart';
 import 'package:Marketplace/firebase_options.dart';
-import 'package:Marketplace/models/Contact.dart';
-import 'package:Marketplace/models/User.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:Marketplace/routes.dart';
@@ -15,8 +12,6 @@ Future<void> main() async {
       options: DefaultFirebaseOptions.currentPlatform
   );
   await GetStorage.init();
-
-  GetStorage().write('CurrentUser', 'some user');
   runApp(const MyApp());
 }
 

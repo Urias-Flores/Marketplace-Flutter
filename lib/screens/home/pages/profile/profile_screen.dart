@@ -1,3 +1,4 @@
+import 'package:Marketplace/models/User.dart';
 import 'package:Marketplace/screens/home/pages/no_sign_in/no_sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -9,14 +10,15 @@ import 'components/profile_pic.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     final currentUser = GetStorage().read('CurrentUser') ?? false;
-    return currentUser is String ? getInformationUser(context) : const NoSignInPage();
+    return currentUser is Map
+        ? getInformationUser(context, User.fromJSON(currentUser as Map<String, dynamic>))
+        : const NoSignInPage();
   }
 
-  Widget getInformationUser(BuildContext context){
+  Widget getInformationUser(BuildContext context, User user){
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
@@ -27,22 +29,22 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(
+                Column(
                   children: [
                     ProfileMenu(
-                      text: "Name here",
+                      text: '${user.contact.firstName} ${user.contact.lastName}',
                       icon: "assets/icons/User Icon.svg",
                     ),
                     ProfileMenu(
-                      text: "Email here",
+                      text: user.email,
                       icon: "assets/icons/Mail.svg",
                     ),
                     ProfileMenu(
-                      text: "Phone number here",
+                      text: user.contact.phone,
                       icon: "assets/icons/Phone-2.svg",
                     ),
                     ProfileMenu(
-                      text: "Adress here",
+                      text: user.contact.address,
                       icon: "assets/icons/Pin.svg",
                     ),
                   ],

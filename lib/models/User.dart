@@ -1,21 +1,21 @@
 import 'package:Marketplace/models/Contact.dart';
 
 class User{
-  final String? id;
-  final String name;
+  String id;
+  final String email;
   final String password;
   final Contact contact;
 
   User(this.id, {
-    required this.name,
+    required this.email,
     required this.password,
     required this.contact,
   });
 
   factory User.fromJSON(Map<String, dynamic> data){
     return User(
-      data['DocumentID'] ?? '',
-      name: data['Name'] ?? '',
+      data['Document ID'] ?? '',
+      email: data['Email'] ?? '',
       password: data['Password'] ?? '',
       contact: Contact.fromJSON(data['Contact']),
     );
@@ -23,7 +23,8 @@ class User{
 
   toJSON(){
     return {
-      'Name': name,
+      'Document ID': id,
+      'Email': email,
       'Password': password,
       'Contact': contact.toJSON()
     };

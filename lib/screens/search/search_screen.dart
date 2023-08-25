@@ -1,12 +1,7 @@
-import 'package:Marketplace/models/Cart.dart';
 import 'package:Marketplace/screens/search/components/products_list.dart';
 import 'package:Marketplace/screens/search/components/search_header.dart';
 import 'package:Marketplace/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:Marketplace/components/search_field.dart';
-
-import '../../components/product_card.dart';
-import '../../models/Product_Propio.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -26,7 +21,7 @@ class SearchScreen extends StatelessWidget {
               'Resultado de busqueda',
               style: TextStyle(color: Colors.black),
             ),
-            const ProductList(),
+            ProductList(searchWord: setString),
           ],
         ),
       ),

@@ -3,7 +3,6 @@ import 'package:Marketplace/screens/home/pages/my_products/my_products_page.dart
 import 'package:Marketplace/screens/home/pages/wish_list/wish_list_page.dart';
 import 'package:Marketplace/screens/search/search_screen.dart';
 import 'package:flutter/widgets.dart';
-import 'package:Marketplace/screens/cart/cart_screen.dart';
 import 'package:Marketplace/screens/complete_profile/complete_profile_screen.dart';
 import 'package:Marketplace/screens/details/details_screen.dart';
 import 'package:Marketplace/screens/forgot_password/forgot_password_screen.dart';
@@ -28,6 +27,5 @@ final Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => const HomeScreen(),
   AddProductScreen.routeName: (context) => const AddProductScreen(),
   DetailsScreen.routeName: (context) => const DetailsScreen(),
-  CartScreen.routeName: (context) => const CartScreen(),
   SearchScreen.routeName: (context) => const SearchScreen(),
 };

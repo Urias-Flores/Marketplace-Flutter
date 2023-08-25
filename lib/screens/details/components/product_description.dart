@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:Marketplace/models/Product_Propio.dart';
-
-import '../../../constants.dart';
-import '../../../size_config.dart';
+import 'package:Marketplace/models/Product.dart';
+import 'package:Marketplace/constants.dart';
+import 'package:Marketplace/size_config.dart';
 
 class ProductDescription extends StatelessWidget {
   const ProductDescription({
@@ -24,7 +23,7 @@ class ProductDescription extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: Text(
-            product.title,
+            product.name,
             style: Theme.of(context).textTheme.headline6,
           ),
         ),
@@ -33,9 +32,9 @@ class ProductDescription extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(getProportionateScreenWidth(15)),
             width: getProportionateScreenWidth(64),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color:
-                  product.isFavourite ? Color(0xFFFFE6E6) : Color(0xFFF5F6F9),
+                  true ? Color(0xFFFFE6E6) : const Color(0xFFF5F6F9),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
                 bottomLeft: Radius.circular(20),
@@ -44,7 +43,7 @@ class ProductDescription extends StatelessWidget {
             child: SvgPicture.asset(
               "assets/icons/Heart Icon_2.svg",
               color:
-                  product.isFavourite ? Color(0xFFFF4848) : Color(0xFFDBDEE4),
+                  true ? const Color(0xFFFF4848) : const Color(0xFFDBDEE4),
               height: getProportionateScreenWidth(16),
             ),
           ),
@@ -68,16 +67,16 @@ class ProductDescription extends StatelessWidget {
             onTap: () {},
             child: Row(
               children: [
-                Text(
-                  "See More Detail",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600, color: kPrimaryColor),
-                ),
-                SizedBox(width: 5),
-                Icon(
-                  Icons.arrow_forward_ios,
+                const Icon(
+                  Icons.category,
                   size: 12,
                   color: kPrimaryColor,
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  product.category.name,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600, color: kPrimaryColor),
                 ),
               ],
             ),

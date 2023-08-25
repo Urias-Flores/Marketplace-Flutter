@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:Marketplace/models/Category.dart';
 
 class CategoryServices{
@@ -15,5 +14,12 @@ class CategoryServices{
       categories.add(category);
     });
     return categories;
+  }
+
+  Future<Category> getCategoryByID(String documentID) async {
+    DocumentSnapshot documentSnapshot = await database.collection('Categories').doc(documentID).get();
+    final document = documentSnapshot.data() as Map<String, dynamic>;
+    document['Document ID'] = documentSnapshot.id;
+    return Category.fromJSON(document);
   }
 }

@@ -1,7 +1,8 @@
+import 'package:Marketplace/controllers/main_page_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:Marketplace/Services/category_services.dart';
 import 'package:Marketplace/models/Category.dart';
 import 'package:Marketplace/size_config.dart';
+import 'package:get/get.dart';
 import 'section_title.dart';
 
 class SpecialOffers extends StatelessWidget {
@@ -11,7 +12,7 @@ class SpecialOffers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CategoryServices categoryServices = CategoryServices();
+    final mainPageController = Get.put<MainPageController>(MainPageController());
     return Column(
       children: [
         Padding(
@@ -25,38 +26,33 @@ class SpecialOffers extends StatelessWidget {
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: FutureBuilder(
-            future: categoryServices.getCategories(),
-            builder: (BuildContext context, AsyncSnapshot<List<Category>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.none) {
-                return const Center(
-                  child: Text('No hay conexion'),
-                );
-              }
-              if (snapshot.hasError) {
-                return Text(snapshot.error.toString());
-              }
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return Row(
-                children: [
-                  ...getListCategories(snapshot),
-                  SizedBox(width: getProportionateScreenWidth(20)),
-                ],
-              );
-            },
-          )
+          child: Obx( () {
+            if(mainPageController.isProductsLoading){
+              return const Center(child: CircularProgressIndicator());
+            } else if( mainPageController.existErrorCategories.isNotEmpty ){
+              return Center(child: Text(mainPageController.existErrorCategories));
+            } else {
+              return Obx(() => getCategories(mainPageController.categories));
+            }
+          })
         ),
       ],
     );
   }
 
-  List<SpecialOfferCard> getListCategories(AsyncSnapshot<List<Category>> categories){
+  Widget getCategories(List<Category> categories){
+    return Row(
+      children: [
+        ...getListCategories(categories),
+        SizedBox(width: getProportionateScreenWidth(20)),
+      ],
+    );
+  }
+
+  List<SpecialOfferCard> getListCategories(List<Category> categories){
     List<SpecialOfferCard> categoriesWidget = [];
-    for(int i = 0; i < categories.data!.length; i++){
-      final category = categories.data![i];
-      print('CategoryID: ${category.id}');
+    for(int i = 0; i < categories.length; i++){
+      final category = categories[i];
       final specialOfferCard = SpecialOfferCard(
           category: category.name,
           image: category.image,

@@ -1,7 +1,14 @@
 import 'User.dart';
 import 'Category.dart';
 
-enum State{ available, spent, notAvailable }
+enum State{ available, spent, notAvailable, noData }
+
+Map<String, State> toState = {
+  '': State.noData,
+  'available': State.available,
+  'spent': State.spent,
+  'notAvailable': State.notAvailable,
+};
 
 class Product{
   final String? id;
@@ -9,8 +16,8 @@ class Product{
   final String description;
   final double price;
   final double discount;
-  final State state;
-  final String image;
+  final State? state;
+  final List<dynamic> image;
   final User user;
   final Category category;
 
@@ -30,12 +37,12 @@ class Product{
       data['Document ID'] ?? '',
       name: data['Name'] ?? '',
       description: data['Description'] ?? '',
-      price: data['Price'] ?? 0.0,
-      discount: data['Discount'] ?? 0.0,
-      state: data['State'] ?? '',
-      image: data['Image'] ?? '',
-      user: User.fromJSON(data['User']),
-      category: Category.fromJSON(data['Category']),
+      price: data['Price'].toDouble(),
+      discount: data['Discount'].toDouble(),
+      state: toState[data['State']],
+      image: data['Images'] as List<dynamic> ?? [],
+      user: data['User'],
+      category: data['Category'],
     );
   }
 
@@ -45,7 +52,7 @@ class Product{
       'Description': description,
       'Price': price,
       'Discount': discount,
-      'State': state.name,
+      'State': state.toString(),
       'Image': image,
       'User': user.toJSON(),
       'Category': category.toJSON(),

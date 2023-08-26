@@ -12,35 +12,36 @@ class SpecialOffers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainPageController = Get.put<MainPageController>(MainPageController());
+    final mainPageController =
+        Get.put<MainPageController>(MainPageController());
     return Column(
       children: [
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SectionTitle(
-            title: "Categories",
+            title: "Categorías",
             press: () {},
           ),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Obx( () {
-            if(mainPageController.isProductsLoading){
-              return const Center(child: CircularProgressIndicator());
-            } else if( mainPageController.existErrorCategories.isNotEmpty ){
-              return Center(child: Text(mainPageController.existErrorCategories));
-            } else {
-              return Obx(() => getCategories(mainPageController.categories));
-            }
-          })
-        ),
+            scrollDirection: Axis.horizontal,
+            child: Obx(() {
+              if (mainPageController.isProductsLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (mainPageController.existErrorCategories.isNotEmpty) {
+                return Center(
+                    child: Text(mainPageController.existErrorCategories));
+              } else {
+                return Obx(() => getCategories(mainPageController.categories));
+              }
+            })),
       ],
     );
   }
 
-  Widget getCategories(List<Category> categories){
+  Widget getCategories(List<Category> categories) {
     return Row(
       children: [
         ...getListCategories(categories),
@@ -49,16 +50,15 @@ class SpecialOffers extends StatelessWidget {
     );
   }
 
-  List<SpecialOfferCard> getListCategories(List<Category> categories){
+  List<SpecialOfferCard> getListCategories(List<Category> categories) {
     List<SpecialOfferCard> categoriesWidget = [];
-    for(int i = 0; i < categories.length; i++){
+    for (int i = 0; i < categories.length; i++) {
       final category = categories[i];
       final specialOfferCard = SpecialOfferCard(
           category: category.name,
           image: category.image,
           numOfProducts: 20,
-          press: () {}
-      );
+          press: () {});
       categoriesWidget.add(specialOfferCard);
     }
     return categoriesWidget;

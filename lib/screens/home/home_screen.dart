@@ -4,6 +4,7 @@ import 'package:Marketplace/screens/home/pages/wish_list/wish_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:Marketplace/screens/home/components/coustom_bottom_nav_bar.dart';
 
+import '../../size_config.dart';
 import 'pages/main/main_page.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,17 +22,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       body: SafeArea(
           child: PageView(
-            controller: _pageController,
-            physics: const NeverScrollableScrollPhysics(),
-            children: const [
-              MainPage(),
-              WishListPage(),
-              MyProductsPage(),
-              ProfilePage()
-            ],
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: const [
+          MainPage(),
+          WishListPage(),
+          MyProductsPage(),
+          ProfilePage()
+        ],
       )),
       bottomNavigationBar: CustomBottomNavBar(
         pageController: _pageController,

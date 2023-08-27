@@ -7,11 +7,11 @@ class ProductCard extends StatelessWidget {
   ProductCard({super.key, required this.product});
   final Product product;
 
-  Map<productState, String> stateToString = {
-    productState.noData: 'No Data',
-    productState.available: 'Disponible',
-    productState.spent: 'Agotado',
-    productState.notAvailable: 'No disponible'
+  Map<ProductState, String> stateToString = {
+    ProductState.noData: 'No Data',
+    ProductState.available: 'Disponible',
+    ProductState.spent: 'Agotado',
+    ProductState.notAvailable: 'No disponible'
   };
 
   @override
@@ -29,9 +29,7 @@ class ProductCard extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: const Color(0xFFF5F6F9),
                       borderRadius: BorderRadius.circular(15)),
-                  child: const Image(
-                    image: AssetImage('assets/images/ps4_console_blue_1.png'),
-                  ),
+                  child: Image.network(product.image[0].toString()),
                 )),
             SizedBox(width: getProportionateScreenWidth(15)),
             Expanded(
@@ -94,6 +92,7 @@ class ProductCard extends StatelessWidget {
   Text descriptionText({required String text}){
     return Text(
       text,
+      maxLines: 1,
       style: const TextStyle(
         color: Colors.grey,
         fontSize: 12,

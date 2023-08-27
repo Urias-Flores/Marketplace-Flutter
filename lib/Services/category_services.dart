@@ -7,12 +7,12 @@ class CategoryServices{
   Future<List<Category>> getCategories() async {
     List<Category> categories = [];
     QuerySnapshot querySnapshot = await database.collection('Categories').get();
-    querySnapshot.docs.forEach((doc) {
+    for (var doc in querySnapshot.docs) {
       final document = doc.data() as Map<String, dynamic>;
       document['Document ID'] = doc.id;
       Category category = Category.fromJSON(document);
       categories.add(category);
-    });
+    }
     return categories;
   }
 

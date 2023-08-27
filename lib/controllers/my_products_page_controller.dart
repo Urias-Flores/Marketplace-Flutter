@@ -28,6 +28,17 @@ class MyProductsPageController extends GetxController{
     loadProductsList();
   }
 
+  Future reloadProducts() async {
+    try {
+      List<Product> productsList = await ProductService().getProductsByUser();
+      products = productsList;
+      isLoading = false;
+    } catch ( error ) {
+      existError = error.toString();
+      isLoading = false;
+    }
+  }
+
   Future loadProductsList() async{
     if(products.isNotEmpty){
       isLoading = false;
@@ -35,8 +46,6 @@ class MyProductsPageController extends GetxController{
     }
 
     try {
-      final currentUser = GetStorage().read('CurrentUser') as Map<String, dynamic>;
-      User user = User.fromJSON(currentUser);
       List<Product> productsList = await ProductService().getProductsByUser();
       products = productsList;
       isLoading = false;

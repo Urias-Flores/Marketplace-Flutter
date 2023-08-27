@@ -1,22 +1,22 @@
 import 'User.dart';
 import 'Category.dart';
 
-enum productState{ available, spent, notAvailable, noData }
+enum ProductState{ available, spent, notAvailable, noData }
 
-Map<String, productState> toState = {
-  '': productState.noData,
-  'available': productState.available,
-  'spent': productState.spent,
-  'notAvailable': productState.notAvailable,
+Map<String, ProductState> toState = {
+  '': ProductState.noData,
+  'available': ProductState.available,
+  'spent': ProductState.spent,
+  'notAvailable': ProductState.notAvailable,
 };
 
 class Product{
-  final String? id;
+  String id;
   final String name;
   final String description;
   final double price;
   final double discount;
-  final productState? state;
+  final ProductState? state;
   final List<dynamic> image;
   final User user;
   final Category category;

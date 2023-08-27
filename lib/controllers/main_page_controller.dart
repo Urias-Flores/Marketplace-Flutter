@@ -43,10 +43,12 @@ class MainPageController extends GetxController{
       return;
     }
 
+
     try{
       categories = await CategoryServices().getCategories();
       isCategoriesLoading = false;
     } catch (error) {
+      print('ERROR: $error');
       existErrorCategories = error.toString();
       isCategoriesLoading = false;
     }
@@ -62,8 +64,25 @@ class MainPageController extends GetxController{
       products = await ProductService().getProducts();
       isProductsLoading = false;
     } catch (error) {
+      print('ERROR: $error');
       existErrorCategories = error.toString();
       isProductsLoading = false;
+    }
+  }
+
+  Future reloadProductsAndCategories() async {
+    try{
+      products = await ProductService().getProducts();
+      isProductsLoading = false;
+
+      categories = await CategoryServices().getCategories();
+      isCategoriesLoading = false;
+
+    } catch (error) {
+      print('ERROR: $error');
+      existErrorCategories = error.toString();
+      isProductsLoading = false;
+      isCategoriesLoading = false;
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:Marketplace/controllers/my_products_page_controller.dart';
 import 'package:Marketplace/screens/home/pages/my_products/components/product_card.dart';
 import 'package:Marketplace/screens/home/pages/no_sign_in/no_sign_in_page.dart';
+import 'package:Marketplace/screens/details/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Marketplace/screens/add_product/add_product_screen.dart';
 import 'package:get/get.dart';
@@ -28,11 +29,20 @@ class MyProductsPage extends StatelessWidget{
         } else if(myProductsPageController.existError.isNotEmpty){
           return Center( child: Text(myProductsPageController.existError) );
         } else {
-          return ListView.builder(
-              itemCount: myProductsPageController.products.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ProductCard(product: myProductsPageController.products[index]);
-              }
+          return RefreshIndicator(
+              onRefresh: () async { myProductsPageController.reloadProducts(); },
+              child: ListView.builder(
+                  itemCount: myProductsPageController.products.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, DetailsScreen.routeName,
+                            arguments: ProductDetailsArguments(product: myProductsPageController.products[index]));
+                      },
+                      child: ProductCard(product: myProductsPageController.products[index]),
+                    );
+                  }
+              )
           );
         }
       }
@@ -61,10 +71,10 @@ class MyProductsPage extends StatelessWidget{
                 "Your products",
                 style: TextStyle(color: Colors.black),
               ),
-              Text(
+              Obx(() => Text(
                 "${myProductsPageController.products.length} items",
                 style: Theme.of(context).textTheme.caption,
-              ),
+              ),)
             ],
           ),
         )

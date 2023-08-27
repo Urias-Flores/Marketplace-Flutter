@@ -28,18 +28,6 @@ class AddImage extends StatelessWidget{
     );
   }
 
-  List<Widget> getListOfImages(){
-    List<Widget> listOfImages = [];
-    addProductController.selectedImages.forEach((imagePath) {
-      if( imagePath is String && imagePath.isNotEmpty){
-        final imageWidget = getWidgetImage(imagePath);
-        listOfImages.add(imageWidget);
-      }
-    });
-    listOfImages.add(getButtonAdd());
-    return listOfImages;
-  }
-
   Widget getButtonAdd(){
     return GestureDetector(
       onTap: pickFile,
@@ -63,23 +51,48 @@ class AddImage extends StatelessWidget{
     );
   }
 
-  Widget getWidgetImage(String path){
+  Widget getWidgetImage(String path) {
     return Container(
       padding: EdgeInsets.only(
-          right: getProportionateScreenWidth(10),
-          bottom: getProportionateScreenHeight(30)
+        right: getProportionateScreenWidth(10),
+        bottom: getProportionateScreenHeight(30),
       ),
-      child: SizedBox(
-        width: 85,
-        height: 85,
-        child: Container(
-          padding: EdgeInsets.all(getProportionateScreenWidth(0)),
-          decoration: BoxDecoration(
-              color: const Color(0xFFF5F6F9),
-              borderRadius: BorderRadius.circular(15)),
-          child: Image.file(File(path)),
+      child: Stack(
+          children: [
+            Container(
+              width: 85,
+              height: 85,
+              padding: EdgeInsets.all(getProportionateScreenWidth(0)),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF5F6F9),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Image.file(File(path)),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: GestureDetector(
+                onTap: () {
+                  final newList = addProductController.selectedImages
+                      .where((currentPath) => currentPath != path ).toList();
+                  addProductController.selectedImages = newList;
+                  print('New List: $newList');
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.close,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
     );
   }
 
@@ -89,8 +102,7 @@ class AddImage extends StatelessWidget{
     );
     if (result != null) {
       final path = result.files.single.path;
-      addProductController.selectedImages.add(path ?? '');
-
+      addProductController.selectedImages = [...addProductController.selectedImages, path];
     }
   }
 }

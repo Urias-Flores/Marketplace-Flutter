@@ -11,7 +11,7 @@ class AddProductScreen extends StatelessWidget{
       appBar: AppBar(
         title: const Text(''),
       ),
-      body: const Body(),
+      body: Body(),
     );
   }
 }

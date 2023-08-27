@@ -1,12 +1,15 @@
+import 'package:Marketplace/Services/user_services.dart';
 import 'package:flutter/material.dart';
 import 'package:Marketplace/components/custom_suffix_icon.dart';
 import 'package:Marketplace/components/form_error.dart';
 import 'package:Marketplace/helper/keyboard.dart';
 import 'package:Marketplace/screens/forgot_password/forgot_password_screen.dart';
 import 'package:Marketplace/screens/home/home_screen.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../../components/default_button.dart';
 import '../../../constants.dart';
+import '../../../models/User.dart';
 import '../../../size_config.dart';
 
 
@@ -19,8 +22,8 @@ class SignForm extends StatefulWidget {
 
 class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
-  String? email;
-  String? password;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool? remember = false;
   final List<String?> errors = [];
 
@@ -77,12 +80,22 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             text: "Sign in",
-            press: () {
+            press: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, HomeScreen.routeName);
+                UserServices().getUserByEmail(emailController.text).then((user) {
+                  if( user == null ){
+                    addError(error: kEmailNotExist);
+                    return;
+                  } else if ( passwordController.text != user.password ){
+                    addError(error: kPassIncorrect);
+                    return;
+                  }
+                  GetStorage().write('CurrentUser', user.toJSON());
+                  Navigator.pushNamed(context, HomeScreen.routeName);
+                });
               }
             },
           ),
@@ -93,8 +106,8 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
+      controller: passwordController,
       obscureText: true,
-      onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
@@ -126,8 +139,8 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
+      controller: emailController,
       keyboardType: TextInputType.emailAddress,
-      onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);

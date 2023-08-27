@@ -1,43 +1,36 @@
+import 'package:Marketplace/controllers/product_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:Marketplace/models/Product.dart';
+import 'package:Marketplace/constants.dart';
+import 'package:Marketplace/size_config.dart';
+import 'package:get/get.dart';
 
-import '../../../constants.dart';
-import '../../../size_config.dart';
-
-class ProductImages extends StatefulWidget {
-  const ProductImages({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
-
+class ProductImages extends StatelessWidget {
+  ProductImages({super.key, required this.product });
   final Product product;
+  final ProductCardController productCardController = Get.put<ProductCardController>(ProductCardController());
 
   @override
-  _ProductImagesState createState() => _ProductImagesState();
-}
-
-class _ProductImagesState extends State<ProductImages> {
-  int selectedImage = 0;
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Column(
       children: [
         SizedBox(
           width: getProportionateScreenWidth(238),
           child: AspectRatio(
             aspectRatio: 1,
-            child: Hero(
-              tag: widget.product.id.toString(),
-              child: Image.asset(widget.product.images[selectedImage]),
-            ),
+            child: Obx(() => Hero(
+                tag: product.id.toString(),
+                child: Image.network(product.image[productCardController.selectedImage]),
+              )
+            )
           ),
         ),
         // SizedBox(height: getProportionateScreenWidth(20)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ...List.generate(widget.product.images.length,
-                (index) => buildSmallProductPreview(index)),
+            ...List.generate(product.image.length,
+                    (index) => buildSmallProductPreview(index)),
           ],
         )
       ],
@@ -47,24 +40,23 @@ class _ProductImagesState extends State<ProductImages> {
   GestureDetector buildSmallProductPreview(int index) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          selectedImage = index;
-        });
+        productCardController.selectedImage = index;
       },
-      child: AnimatedContainer(
-        duration: defaultDuration,
-        margin: EdgeInsets.only(right: 15),
-        padding: EdgeInsets.all(8),
-        height: getProportionateScreenWidth(48),
-        width: getProportionateScreenWidth(48),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-              color: kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
-        ),
-        child: Image.asset(widget.product.images[index]),
-      ),
+      child: Obx(() => AnimatedContainer(
+          duration: defaultDuration,
+          margin: const EdgeInsets.only(right: 15),
+          padding: const EdgeInsets.all(8),
+          height: getProportionateScreenWidth(48),
+          width: getProportionateScreenWidth(48),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+                color: kPrimaryColor.withOpacity(productCardController.selectedImage == index ? 1 : 0)),
+          ),
+          child: Image.network(product.image[index]),
+        )
+      )
     );
   }
 }

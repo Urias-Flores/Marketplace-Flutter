@@ -1,35 +1,19 @@
+import 'package:Marketplace/components/search_field.dart';
+import 'package:Marketplace/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:Marketplace/screens/cart/cart_screen.dart';
 
-import '../../../../../size_config.dart';
-import 'icon_btn_with_counter.dart';
-import '../../../../../components/search_field.dart';
-
-class HomeHeader extends StatelessWidget {
-  const HomeHeader({
-    Key? key,
-  }) : super(key: key);
+class HomeHeader extends StatelessWidget{
+  const HomeHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SearchField(),
-          IconBtnWithCounter(
-            svgSrc: "assets/icons/Cart Icon.svg",
-            press: () => Navigator.pushNamed(context, CartScreen.routeName),
-          ),
-          IconBtnWithCounter(
-            svgSrc: "assets/icons/Bell.svg",
-            numOfitem: 3,
-            press: () {},
-          ),
-        ],
+    return Container(
+      margin: EdgeInsets.only(
+        top: getProportionateScreenWidth(20),
+        right: getProportionateScreenWidth(20),
+        left: getProportionateScreenWidth(20),
       ),
+      child: SearchField(),
     );
   }
 }

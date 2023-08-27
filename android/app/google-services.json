@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "602068764637",
-    "project_id": "marketplace-flutter-8c6bd",
-    "storage_bucket": "marketplace-flutter-8c6bd.appspot.com"
+    "project_number": "631856390356",
+    "project_id": "marketplace-se",
+    "storage_bucket": "marketplace-se.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:602068764637:android:bc462f3302f3d6bb801834",
+
+        "mobilesdk_app_id": "1:631856390356:android:a180152cd020392908db41",
         "android_client_info": {
-          "package_name": "hn.edu.unah.marketplace_fluter"
+          "package_name": "com.example.e_commerce_flutter"
         }
       },
       "oauth_client": [
         {
-          "client_id": "602068764637-mnrav4ughf9rtii09q41psv2qn3fm3dv.apps.googleusercontent.com",
+          "client_id": "631856390356-cfh05rqms0mrdlft9c299jk46un80545.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC1HaUg7mjLjssQhi2cw3OK-yMDCFNtcG8"
+          "current_key": "AIzaSyBaLjBEGjHQwohw-eoN2LGP71d8c0_pOnU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "602068764637-mnrav4ughf9rtii09q41psv2qn3fm3dv.apps.googleusercontent.com",
+              "client_id": "631856390356-cfh05rqms0mrdlft9c299jk46un80545.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,6 +1,8 @@
+import 'package:Marketplace/controllers/main_page_controller.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../size_config.dart';
+import 'package:Marketplace/models/Category.dart';
+import 'package:Marketplace/size_config.dart';
+import 'package:get/get.dart';
 import 'section_title.dart';
 
 class SpecialOffers extends StatelessWidget {
@@ -10,45 +12,56 @@ class SpecialOffers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mainPageController =
+        Get.put<MainPageController>(MainPageController());
     return Column(
       children: [
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SectionTitle(
-            title: "Categories",
+            title: "Categorías",
             press: () {},
           ),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              SpecialOfferCard(
-                image: "assets/images/Image Banner 2.png",
-                category: "Smartphone",
-                numOfProducts: 18,
-                press: () {},
-              ),
-              SpecialOfferCard(
-                image: "assets/images/Image Banner 3.png",
-                category: "Fashion",
-                numOfProducts: 24,
-                press: () {},
-              ),
-              SpecialOfferCard(
-                image: "assets/images/Image Banner 3.png",
-                category: "Others",
-                numOfProducts: 4,
-                press: () {},
-              ),
-              SizedBox(width: getProportionateScreenWidth(20)),
-            ],
-          ),
-        ),
+            scrollDirection: Axis.horizontal,
+            child: Obx(() {
+              if (mainPageController.isProductsLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (mainPageController.existErrorCategories.isNotEmpty) {
+                return Center(
+                    child: Text(mainPageController.existErrorCategories));
+              } else {
+                return Obx(() => getCategories(mainPageController.categories));
+              }
+            })),
       ],
     );
+  }
+
+  Widget getCategories(List<Category> categories) {
+    return Row(
+      children: [
+        ...getListCategories(categories),
+        SizedBox(width: getProportionateScreenWidth(20)),
+      ],
+    );
+  }
+
+  List<SpecialOfferCard> getListCategories(List<Category> categories) {
+    List<SpecialOfferCard> categoriesWidget = [];
+    for (int i = 0; i < categories.length; i++) {
+      final category = categories[i];
+      final specialOfferCard = SpecialOfferCard(
+          category: category.name,
+          image: category.image,
+          numOfProducts: 20,
+          press: () {});
+      categoriesWidget.add(specialOfferCard);
+    }
+    return categoriesWidget;
   }
 }
 
@@ -78,7 +91,7 @@ class SpecialOfferCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Stack(
               children: [
-                Image.asset(
+                Image.network(
                   image,
                   fit: BoxFit.cover,
                 ),

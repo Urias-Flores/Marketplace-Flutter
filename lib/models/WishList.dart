@@ -2,7 +2,7 @@ import 'package:Marketplace/models/Product.dart';
 import 'package:Marketplace/models/User.dart';
 
 class WishList{
-  final String id;
+  String id;
   final User user;
   final List<Product> products;
 

@@ -1,6 +1,5 @@
 import 'package:Marketplace/models/User.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 
 class UserServices{
   final database = FirebaseFirestore.instance;
@@ -18,12 +17,12 @@ class UserServices{
   Future<List<User>> getUsers() async {
     QuerySnapshot querySnapshot = await database.collection('Users').get();
     List<User> users = [];
-    querySnapshot.docs.forEach((doc) {
+    for (var doc in querySnapshot.docs) {
       final document = doc.data() as Map<String, dynamic>;
       document['Document ID'] = doc.id;
       User user = User.fromJSON(document);
       users.add(user);
-    });
+    }
     return users;
   }
 

@@ -24,6 +24,29 @@ class WishListServices{
     }
   }
 
+  Future updateProductsInWishList({ required String product, String option = 'ADD' }) async {
+    final user = await GetStorage().read('CurrentUser') as Map<String, dynamic>;
+    User userInstance = User.fromJSON(user);
+    DocumentReference userReference = database.collection('User').doc(userInstance.id);
+    try {
+      QuerySnapshot wishListsSnapshot = await database.collection('WishList').where('User', isEqualTo: userReference).get();
+      if(wishListsSnapshot.docs.isNotEmpty){
+        final wishListID = wishListsSnapshot.docs[0].id;
+        DocumentReference wishListReference = database.collection('WishList').doc(wishListID);
+        DocumentReference productReference = database.collection('Products').doc(product);
+
+        wishListReference.set({
+          'Products': option == 'DELETE'
+              ? FieldValue.arrayRemove([productReference])
+              : FieldValue.arrayUnion([productReference])
+        }, SetOptions(merge: true));
+      }
+    } catch (error) {
+      print('ERROR: $error');
+      return;
+    }
+  }
+
   Future<WishList?> getWishListByUser({ required String userID }) async{
     DocumentReference userReference = database.collection('Users').doc(userID);
     QuerySnapshot querySnapshot = await database.collection('WishList').where('User', isEqualTo: userReference).get();
@@ -63,7 +86,7 @@ class WishListServices{
   }
 
   Future<bool> getExistInWishList({ required String productID }) async {
-    final user = GetStorage().read('CurrentUser') as Map<String, dynamic>;
+    final user = await GetStorage().read('CurrentUser') as Map<String, dynamic>;
     User userInstance = User.fromJSON(user);
     DocumentReference userReference = database.collection('Users').doc(userInstance.id);
 

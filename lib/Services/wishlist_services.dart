@@ -11,10 +11,7 @@ class WishListServices{
   Future<WishList> createWishList(WishList wishList) async {
     try {
       DocumentReference userReference = database.collection('User').doc(wishList.user.id);
-      final wishListInstance = {
-        'User': userReference,
-        'Products': []
-      };
+      final wishListInstance = { 'User': userReference, 'Products': [] };
       DocumentReference newWishList = await database.collection('WishList').add(wishListInstance);
       wishList.id = newWishList.id;
       return wishList;

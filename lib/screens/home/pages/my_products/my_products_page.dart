@@ -11,7 +11,7 @@ class MyProductsPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final user = GetStorage().read('CurrentUser') ?? false;
-    return user is String ? getProductList(context) : const NoSignInPage();
+    return user is Map ? getProductList(context) : const NoSignInPage();
   }
 
   Scaffold getProductList(BuildContext context){

@@ -16,8 +16,8 @@ class ImageServices{
       imageRef.putFile(file);
 
       return await imageRef.getDownloadURL();
-    } on FirebaseException catch(e) {
-      print('ERROR: $e');
+    } on FirebaseException catch(error) {
+      print('ERROR: $error');
       return '';
     }
   }

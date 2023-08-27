@@ -7,7 +7,6 @@
   "client": [
     {
       "client_info": {
-
         "mobilesdk_app_id": "1:631856390356:android:a180152cd020392908db41",
         "android_client_info": {
           "package_name": "com.example.e_commerce_flutter"
@@ -30,6 +29,13 @@
             {
               "client_id": "631856390356-cfh05rqms0mrdlft9c299jk46un80545.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "631856390356-3paqeigpqdmnpdiepsevndv3msjv5mg0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eCommerceFlutter"
+              }
             }
           ]
         }

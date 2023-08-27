@@ -1,4 +1,4 @@
-package hn.edu.unah.marketplace_flutter
+package com.example.e_commerce_flutter
 
 import io.flutter.embedding.android.FlutterActivity
 

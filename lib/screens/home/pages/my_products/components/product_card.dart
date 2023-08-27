@@ -1,9 +1,18 @@
 import 'package:Marketplace/constants.dart';
+import 'package:Marketplace/models/Product.dart';
 import 'package:Marketplace/size_config.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+  ProductCard({super.key, required this.product});
+  final Product product;
+
+  Map<productState, String> stateToString = {
+    productState.noData: 'No Data',
+    productState.available: 'Disponible',
+    productState.spent: 'Agotado',
+    productState.notAvailable: 'No disponible'
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +39,14 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    nameText(text: 'Name here.'),
-                    descriptionText(text: 'Product description will go here'),
+                    nameText(text: product.name),
+                    descriptionText(text: product.description),
                     SizedBox(height: getProportionateScreenHeight(5)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        priceText(text: '\$89.99'),
-                        statusText(text: 'Disponible'),
+                        priceText(text: '\$${product.price}'),
+                        statusText(text: '${stateToString[product!.state]}'),
                       ],
                     ),
                     SizedBox(height: getProportionateScreenHeight(5)),

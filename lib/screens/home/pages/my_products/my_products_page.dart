@@ -1,12 +1,15 @@
+import 'package:Marketplace/controllers/my_products_page_controller.dart';
 import 'package:Marketplace/screens/home/pages/my_products/components/product_card.dart';
 import 'package:Marketplace/screens/home/pages/no_sign_in/no_sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:Marketplace/screens/add_product/add_product_screen.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:Marketplace/size_config.dart';
 
 class MyProductsPage extends StatelessWidget{
   const MyProductsPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +18,25 @@ class MyProductsPage extends StatelessWidget{
   }
 
   Scaffold getProductList(BuildContext context){
+    MyProductsPageController myProductsPageController =
+      Get.put<MyProductsPageController>(MyProductsPageController());
     return Scaffold(
-      appBar: buildAppBar(context, 20),
-      body: ListView.builder(
-        itemCount: 20,
-        itemBuilder: (BuildContext context, int item) => const ProductCard(),
+      appBar: buildAppBar(context),
+      body: Obx(() {
+        if(myProductsPageController.isLoading){
+          return const Center( child: CircularProgressIndicator() );
+        } else if(myProductsPageController.existError.isNotEmpty){
+          return Center( child: Text(myProductsPageController.existError) );
+        } else {
+          return ListView.builder(
+              itemCount: myProductsPageController.products.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ProductCard(product: myProductsPageController.products[index]);
+              }
+          );
+        }
+      }
+
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFFFFECDF),
@@ -31,7 +48,9 @@ class MyProductsPage extends StatelessWidget{
     );
   }
 
-  AppBar buildAppBar(BuildContext context, int numItems) {
+  AppBar buildAppBar(BuildContext context) {
+    MyProductsPageController myProductsPageController =
+      Get.put<MyProductsPageController>(MyProductsPageController());
     return AppBar(
         automaticallyImplyLeading: false,
         title: Padding(
@@ -43,7 +62,7 @@ class MyProductsPage extends StatelessWidget{
                 style: TextStyle(color: Colors.black),
               ),
               Text(
-                "$numItems items",
+                "${myProductsPageController.products.length} items",
                 style: Theme.of(context).textTheme.caption,
               ),
             ],

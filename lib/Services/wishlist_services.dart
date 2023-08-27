@@ -1,15 +1,27 @@
 import 'package:Marketplace/models/Product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:Marketplace/models/WishList.dart';
 import 'package:Marketplace/models/User.dart';
+import 'package:Marketplace/models/WishList.dart';
 import 'package:Marketplace/models/Category.dart';
 import 'package:get_storage/get_storage.dart';
 
 class WishListServices{
   final database = FirebaseFirestore.instance;
 
-  createWishList(){
-
+  Future<WishList> createWishList(WishList wishList) async {
+    try {
+      DocumentReference userReference = database.collection('User').doc(wishList.user.id);
+      final wishListInstance = {
+        'User': userReference,
+        'Products': []
+      };
+      DocumentReference newWishList = await database.collection('WishList').add(wishListInstance);
+      wishList.id = newWishList.id;
+      return wishList;
+    } catch ( error ) {
+      print('ERROR: $error');
+      return wishList;
+    }
   }
 
   Future<WishList?> getWishListByUser({ required String userID }) async{

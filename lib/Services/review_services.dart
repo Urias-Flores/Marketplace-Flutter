@@ -15,16 +15,16 @@ class ReviewServices{
       });
   }
 
-  Future<List<Review>> getReviewByProduct(String product) async {
-    //Product of type document: djSJOC892jskj
-    List<Review> reviews = [];
-    QuerySnapshot result = await database.collection('Review').where('Product', isEqualTo: product ).get();
-    result.docs.forEach((doc) {
-      final document = doc.data() as Map<String, dynamic>;
-      document['Document ID'] = doc.id;
-      Review review = Review.fromJSON(document);
-      reviews.add(review);
-    });
-    return reviews;
+  Future<double> getReviewByProduct({ required String product }) async {
+    DocumentReference productReference = database.collection('Products').doc(product);
+    QuerySnapshot reviewSnapshot = await database.collection('Review').where('Product', isEqualTo: productReference ).get();
+    double sumRating = 0;
+    int counter = 0;
+    for (var doc in reviewSnapshot.docs) {
+      final review = doc.data() as Map<String, dynamic>;
+      sumRating+= double.parse(review['Rating']);
+      counter++;
+    }
+    return sumRating / counter;
   }
 }

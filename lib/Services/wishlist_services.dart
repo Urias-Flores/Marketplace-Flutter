@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:Marketplace/models/WishList.dart';
 import 'package:Marketplace/models/User.dart';
 import 'package:Marketplace/models/Category.dart';
+import 'package:get_storage/get_storage.dart';
 
 class WishListServices{
   final database = FirebaseFirestore.instance;
@@ -47,5 +48,24 @@ class WishListServices{
       return wishList;
     }
     return null;
+  }
+
+  Future<bool> getExistInWishList({ required String productID }) async {
+    final user = GetStorage().read('CurrentUser') as Map<String, dynamic>;
+    User userInstance = User.fromJSON(user);
+    DocumentReference userReference = database.collection('Users').doc(userInstance.id);
+
+    QuerySnapshot wishListSnapshot = await database.collection('WishList').where('', isEqualTo: userReference).get();
+    if(wishListSnapshot.docs.isNotEmpty){
+      final wishList = wishListSnapshot.docs[0].data() as Map<String, dynamic>;
+      List<DocumentReference> productsRef = List.castFrom(wishList['Products']);
+      for (var productReference in productsRef) {
+        DocumentSnapshot productSnapshot = await productReference.get();
+        if(productSnapshot.id == productID){
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

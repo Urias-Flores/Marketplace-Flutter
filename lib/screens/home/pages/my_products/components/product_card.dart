@@ -1,9 +1,18 @@
 import 'package:Marketplace/constants.dart';
+import 'package:Marketplace/models/Product.dart';
 import 'package:Marketplace/size_config.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+  ProductCard({super.key, required this.product});
+  final Product product;
+
+  Map<ProductState, String> stateToString = {
+    ProductState.noData: 'No Data',
+    ProductState.available: 'Disponible',
+    ProductState.spent: 'Agotado',
+    ProductState.notAvailable: 'No disponible'
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +29,7 @@ class ProductCard extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: const Color(0xFFF5F6F9),
                       borderRadius: BorderRadius.circular(15)),
-                  child: const Image(
-                    image: AssetImage('assets/images/ps4_console_blue_1.png'),
-                  ),
+                  child: Image.network(product.image[0].toString()),
                 )),
             SizedBox(width: getProportionateScreenWidth(15)),
             Expanded(
@@ -30,14 +37,14 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    nameText(text: 'Name here.'),
-                    descriptionText(text: 'Product description will go here'),
+                    nameText(text: product.name),
+                    descriptionText(text: product.description),
                     SizedBox(height: getProportionateScreenHeight(5)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        priceText(text: '\$89.99'),
-                        statusText(text: 'Disponible'),
+                        priceText(text: '\$${product.price}'),
+                        statusText(text: '${stateToString[product!.state]}'),
                       ],
                     ),
                     SizedBox(height: getProportionateScreenHeight(5)),
@@ -85,6 +92,7 @@ class ProductCard extends StatelessWidget {
   Text descriptionText({required String text}){
     return Text(
       text,
+      maxLines: 1,
       style: const TextStyle(
         color: Colors.grey,
         fontSize: 12,

@@ -6,18 +6,19 @@ class ImageServices{
   final storage = FirebaseStorage.instance;
 
   Future<String> uploadImage({ required String path }) async {
-    final storageRef = storage.ref();
     final name = generateRandomString(20);
     final extension = path.split('.')[1];
-    final imageRef = storageRef.child('$name.$extension');
+    final imageRef = storage.ref().child('$name.$extension');
     File file = File(path);
 
     try{
-      imageRef.putFile(file);
+      UploadTask uploadTask = imageRef.putFile(file);
+      TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+      String downloadURL = await taskSnapshot.ref.getDownloadURL();
 
-      return await imageRef.getDownloadURL();
-    } on FirebaseException catch(e) {
-      print('ERROR: $e');
+      return downloadURL;
+    } on FirebaseException catch(error) {
+      print('ERROR: $error');
       return '';
     }
   }

@@ -12,13 +12,13 @@ class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
           const HomeHeader(),
           const DiscountBanner(),
-          const Categories(),
+          // const Categories(),
           const SpecialOffers(),
           SizedBox(height: getProportionateScreenWidth(30)),
           const PopularProducts(),
